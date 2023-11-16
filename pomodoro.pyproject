@@ -1,0 +1,7 @@
+{
+    "files": [
+        "UI/components/RoundButton.qml",
+        "main.py",
+        "main.qml"
+    ]
+}
