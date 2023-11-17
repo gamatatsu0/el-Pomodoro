@@ -9,6 +9,8 @@ Button{
     onClicked: textArea.readOnly = true
 
     property string displayedText: "0";
+    property int size: 15;
+
     text: qsTr(displayedText);
 
 
@@ -24,8 +26,8 @@ Button{
     }
 
     background: Rectangle {
-        implicitWidth: 100
-        implicitHeight: 100
+        implicitWidth: roundButton.size;
+        implicitHeight: roundButton.size;
         opacity: enabled ? 1 : 0.3
         border.color: roundButton.down ? "#17a81a" : "#21be2b"
         border.width: 1

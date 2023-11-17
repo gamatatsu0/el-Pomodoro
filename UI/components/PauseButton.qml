@@ -8,6 +8,7 @@ Button{
     id:pauseButton
     onClicked: textArea.readOnly = true
 
+    property int size: 15;
     property string displayedText: "pause";
     text: qsTr(displayedText);
 
@@ -24,11 +25,11 @@ Button{
     }
 
     background: Rectangle {
-        implicitWidth: 100
-        implicitHeight: 100
-        opacity: enabled ? 1 : 0.3
-        border.color: pauseButton.down ? "#17a81a" : "#21be2b"
-        border.width: 1
-        radius: 180
+        implicitWidth: pauseButton.size;
+        implicitHeight: pauseButton.size;
+        opacity: enabled ? 1 : 0.3;
+        border.color: pauseButton.down ? "#17a81a" : "#21be2b";
+        border.width: 1;
+        radius: 180;
     }
 }

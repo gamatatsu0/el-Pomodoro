@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 11.0.3, 2023-11-15T04:22:50. -->
+<!-- Written by QtCreator 11.0.3, 2023-11-16T19:20:33. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -100,6 +100,7 @@
      <valuemap type="QVariantMap" key="ProjectExplorer.BuildStepList.Step.0">
       <value type="bool" key="ProjectExplorer.BuildStep.Enabled">true</value>
       <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Python.PysideBuildStep</value>
+      <value type="QString" key="Python.PySideProjectTool">/home/owl/Documents/Projects/pomodoro_env/bin/pyside6-project</value>
      </valuemap>
      <value type="qlonglong" key="ProjectExplorer.BuildStepList.StepsCount">1</value>
      <value type="QString" key="ProjectExplorer.ProjectConfiguration.DefaultDisplayName">Build</value>

@@ -1,6 +1,7 @@
 {
     "files": [
         "UI/components/RoundButton.qml",
+        "UI/components/RoundProgressBar.qml",
         "main.py",
         "main.qml"
     ]
