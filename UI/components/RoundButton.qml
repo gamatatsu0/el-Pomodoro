@@ -10,6 +10,9 @@ Button{
 
     property string displayedText: "0";
     property int size: 15;
+    property string buttonColor: "";
+    property string borderColor: "";
+
 
     text: qsTr(displayedText);
 
@@ -18,7 +21,7 @@ Button{
     text: roundButton.text
     font: roundButton.font
     opacity: enabled ? 1.0 : 0.3
-    color: roundButton.down ? "#17a81a" : "#21be2b"
+    color: roundButton.down ? "#21be2b":borderColor
     horizontalAlignment: Text.AlignHCenter
     verticalAlignment: Text.AlignVCenter
     elide: Text.ElideRight
@@ -29,8 +32,9 @@ Button{
         implicitWidth: roundButton.size;
         implicitHeight: roundButton.size;
         opacity: enabled ? 1 : 0.3
-        border.color: roundButton.down ? "#17a81a" : "#21be2b"
-        border.width: 1
+        border.color: roundButton.down ? borderColor : borderColor
+        border.width: 2
         radius: 180
+        color: buttonColor
     }
 }

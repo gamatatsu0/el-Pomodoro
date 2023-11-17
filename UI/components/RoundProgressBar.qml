@@ -35,7 +35,7 @@ Item {
     property int progressWidth: 40
 
 //    Text Properties
-    property string text: "%"
+    property string timeText: "%"
     property string textFontFamily: "Segoe UI"
     property int textSize: 35
     property int rpmLabelSize: 30
@@ -104,6 +104,15 @@ Item {
             id: milesPerHourWidget
             anchors.verticalCenter: parent.verticalCenter
             anchors.horizontalCenter: parent.horizontalCenter
+            anchors.fill: parent
+            font.pixelSize: 24
+            fontSizeMode: Text.Fit
+            minimumPixelSize: 10
+            wrapMode: Text.WordWrap
+
+            horizontalAlignment: Text.AlignHCenter
+            verticalAlignment: Text.AlignVCenter
+            text: qsTr(progress.timeText)
 
 
         }
