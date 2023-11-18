@@ -1,0 +1,39 @@
+[
+    {
+        "classes": [
+            {
+                "className": "Pomodoro",
+                "qualifiedClassName": "Pomodoro",
+                "object": false
+            },
+            {
+                "className": "Bridge",
+                "qualifiedClassName": "Bridge",
+                "object": true,
+                "superClasses": [
+                    {
+                        "access": "public",
+                        "name": "QObject"
+                    }
+                ],
+                "classInfos": [
+                    {
+                        "name": "QML.Element",
+                        "value": "auto"
+                    }
+                ]
+            }
+        ],
+        "outputRevision": 68,
+        "QML_IMPORT_NAME": "io.qt.textproperties",
+        "QML_IMPORT_MAJOR_VERSION": 1,
+        "QML_IMPORT_MINOR_VERSION": 0,
+        "QT_MODULES": [
+            "QtCore",
+            "QtGui",
+            "QtQml",
+            "QtQuickControls2"
+        ],
+        "inputFile": "/home/owl/Documents/Projects/pomodoro/main.py"
+    }
+]

@@ -2,12 +2,17 @@
 
 import sys
 from pathlib import Path
+import datetime
 
 from PySide6.QtCore import QObject, Slot
 from PySide6.QtGui import QGuiApplication
-from PySide6.QtQml import QQmlApplicationEngine
+from PySide6.QtQml import QQmlApplicationEngine, QmlElement
 from PySide6.QtQuickControls2 import QQuickStyle
 
+# To be used on the @QmlElement decorator
+# (QML_IMPORT_MINOR_VERSION is optional)
+QML_IMPORT_NAME = "io.qt.textproperties"
+QML_IMPORT_MAJOR_VERSION = 1
 
 class Pomodoro():
     """ This class is the logic of the pomodoro timer.
@@ -41,7 +46,7 @@ class Pomodoro():
         """
         self.minutes += 20
 
-
+@QmlElement
 class Bridge(QObject):
     """ Bridge class is used to connect the python logic to the
     front QML front-end
