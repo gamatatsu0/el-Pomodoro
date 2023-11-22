@@ -1,7 +1,10 @@
 {
     "files": [
+        "UI/components/LeftButton.qml",
+        "UI/components/SquareButton.qml",
         "UI/components/RoundButton.qml",
         "UI/components/RoundProgressBar.qml",
+        "UI/components/TripleButton.qml",
         "main.py",
         "main.qml"
     ]

@@ -26,11 +26,13 @@ Item {
 //    Big Circle
     property color bgColor: "transparent"
     property color bgStrokeColor: "#7e7e7e"
-    property int strokeBgWidth: 5;
+    property int strokeBgWidth: 8;
 
 //    Progress Circle
     property color progressColor: (progress.rpmValue < 6000)? "blue" : "red"
     property color lessColor: "blue"
+    property color color1: "blue"
+    property color color2: "red"
 
     property int progressWidth: 40
 
