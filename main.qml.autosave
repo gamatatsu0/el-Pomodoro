@@ -199,7 +199,7 @@ Window {
                             anchors.bottom: tenMinContainer.bottom
                             anchors.left: tenMinContainer.left
                             anchors.right: tenMinContainer.right
-
+bridge.
 
                         }
                     }
