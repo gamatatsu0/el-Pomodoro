@@ -3,6 +3,7 @@
 import sys
 from pathlib import Path
 import datetime
+import time
 
 from PySide6.QtCore import QObject, Slot
 from PySide6.QtGui import QGuiApplication
@@ -18,19 +19,20 @@ class Pomodoro():
     """ This class is the logic of the pomodoro timer.
     """
     def __init__(self):
-        self.minutes= 1
+        self.minutes= 20
         self.seconds = self.minutes * 60
 
-    def set_starting_time(self, time):
+    def set_starting_time(self, timer):
         """ Sets the starting time of the Pomodoro timer.
         """
-        self.minutes = time
+        self.minutes = timer
 
     def countdown(self, run):
         """ Decreases the number of seconds by 1.
         """
-        while run:
+        if run:
             self.seconds  = self.seconds -1
+            time.sleep(1)
             print(self.seconds)
 
 
@@ -60,19 +62,19 @@ class Bridge(QObject):
         self.timer = Pomodoro()
         self.running = False
 
-    def set_starting_time(self, time):
+    def set_starting_time(self, timer):
         """ Sets the starting time of the countdown clock.
         """
-        self.timer.set_starting_time(time)
+        self.timer.set_starting_time(timer)
 
     @Slot(int, result=int)
-    def add_time(self, time):
+    def add_time(self, timer):
         """ Based on the value provided by the "time" variable
         a diiferent case will be executed adding the specified time to the
         countdown timer.
         """
-        print(time)
-        match time:
+        print(timer)
+        match timer:
             case 10:
                 self.timer.add_10_minutes()
                 print(self.timer.minutes)
@@ -80,12 +82,22 @@ class Bridge(QObject):
                 self.timer.add_15_minutes()
                 print(self.timer.minutes)
 
-
-    def clock_coundown(self):
+    @Slot(bool, result=bool)
+    def clock_coundown(self, count):
         """ Subtract 1 second from the current time of in the Pomodoro class.
         """
-        self.running = not self.running
+        print("count: "+str(count))
         self.timer.countdown(self.running)
+
+
+    @Slot(bool, result=bool)
+    def pause_or_start(self,count):
+        """ it sends signal for the pause button.
+        """
+
+        self.running = not self.running
+        print(str(count) +": " + str(self.running))
+
 
 
 

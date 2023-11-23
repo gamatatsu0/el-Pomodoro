@@ -130,7 +130,10 @@ ApplicationWindow {
                     }
                 }
             }
-
+            Timer{
+                interval: 1000; running:true; repeat:true;
+                onTriggered: bridge.clock_coundown(true)
+            }
             Rectangle{
                 id:pauseMainContainer
 
@@ -182,7 +185,7 @@ ApplicationWindow {
                             buttonColor:buttonColor
                             borderColor: borderColor
 
-                            onPressed: bridge.clock_coundown()
+                            onPressed: bridge.pause_or_start(true)
                         }
                     }
 

@@ -18,5 +18,15 @@ Module {
             type: "int"
             Parameter { name: "a1"; type: "int" }
         }
+        Method {
+            name: "clock_coundown"
+            type: "bool"
+            Parameter { name: "a1"; type: "bool" }
+        }
+        Method {
+            name: "pause_or_start"
+            type: "bool"
+            Parameter { name: "a1"; type: "bool" }
+        }
     }
 }

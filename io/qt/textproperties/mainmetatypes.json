@@ -33,6 +33,28 @@
                             }
                         ],
                         "returnType": "int"
+                    },
+                    {
+                        "access": "public",
+                        "name": "clock_coundown",
+                        "arguments": [
+                            {
+                                "name": "a1",
+                                "type": "bool"
+                            }
+                        ],
+                        "returnType": "bool"
+                    },
+                    {
+                        "access": "public",
+                        "name": "pause_or_start",
+                        "arguments": [
+                            {
+                                "name": "a1",
+                                "type": "bool"
+                            }
+                        ],
+                        "returnType": "bool"
                     }
                 ]
             }
