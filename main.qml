@@ -101,7 +101,10 @@ ApplicationWindow {
                 }
 
             }
-
+            Timer{
+                interval: 1000; running:true; repeat:true;
+                onTriggered:roundTimer.timeText = bridge.get_current_time(1)
+            }
             // Top Body container
             Rectangle{
                 id:topBodyContainer
@@ -122,6 +125,7 @@ ApplicationWindow {
 
                     // Timer
                     RoundProgressBar{
+                        id:roundTimer
                         size:250;
                         timeText: qsTr("15:30")
                         bgStrokeColor:color3;

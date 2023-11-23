@@ -22,10 +22,16 @@ class Pomodoro():
         self.minutes= 20
         self.seconds = self.minutes * 60
 
-    def set_starting_time(self, timer):
+
+    def set_starting_time(self, minutes):
         """ Sets the starting time of the Pomodoro timer.
         """
-        self.minutes = timer
+        self.minutes = minutes
+
+    def get_current_time_seconds(self):
+        """ Return the current time left on timer in seconds.
+        """
+        return self.seconds
 
     def countdown(self, run):
         """ Decreases the number of seconds by 1.
@@ -62,10 +68,24 @@ class Bridge(QObject):
         self.timer = Pomodoro()
         self.running = False
 
+        self.lastStartingTime = [0]
+
     def set_starting_time(self, timer):
         """ Sets the starting time of the countdown clock.
         """
         self.timer.set_starting_time(timer)
+
+    @Slot(int, result=str)
+    def get_current_time(self, current):
+        """ Returns time left on the timer in seconds.
+        """
+        minutes = int(self.timer.get_current_time_seconds() / 60)
+        seconds = self.timer.get_current_time_seconds() % 60
+        if seconds == 0:
+            seconds = "00"
+
+        string_time = f"{minutes} : {seconds}"
+        return string_time
 
     @Slot(int, result=int)
     def add_time(self, timer):
@@ -94,10 +114,32 @@ class Bridge(QObject):
     def pause_or_start(self,count):
         """ it sends signal for the pause button.
         """
-
+        fresh_start = int(self.timer.get_current_time_seconds()/60)
         self.running = not self.running
+
+        if fresh_start > self.lastStartingTime[0]:
+            self.lastStartingTime[0] = fresh_start
+
         print(str(count) +": " + str(self.running))
 
+    def check_if_done(self):
+        """ Functions checks if the timer os over.
+        If the minutes and seconds are below 1 the timer is re-started to its last
+        startig time.
+        The running value is also set to False to keep the timer from continuing to run
+        """
+        minutes = int(self.timer.get_current_time_seconds() / 60)
+        seconds = self.timer.get_current_time_seconds() % 60
+
+        if minutes < 1 and seconds < 1:
+            self.running = False
+            self.re_start()
+
+    def re_start(self):
+        """ Re-set the timer to the last known starting time.
+        """
+        self.running = False
+        self.set_starting_time(self.lastStartingTime[0])
 
 
 
