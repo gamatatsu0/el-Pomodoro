@@ -13,5 +13,10 @@ Module {
         prototype: "QObject"
         exports: ["io.qt.textproperties/Bridge 1.0"]
         exportMetaObjectRevisions: [256]
+        Method {
+            name: "add_time"
+            type: "int"
+            Parameter { name: "a1"; type: "int" }
+        }
     }
 }

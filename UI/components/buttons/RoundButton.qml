@@ -6,7 +6,6 @@ import QtQuick.Shapes 1.6
 
 Button{
     id:roundButton
-    onClicked: textArea.readOnly = true
 
     property string displayedText: "0";
     property int buttonHeight: 100;
@@ -17,7 +16,7 @@ Button{
     height: buttonHeight
     width: buttonWidth
 
-    contentItem: Text{
+    Text{
         text: roundButton.text
         font: roundButton.font
         opacity: enabled ? 1.0 : 0.3

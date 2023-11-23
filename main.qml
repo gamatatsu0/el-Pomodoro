@@ -13,7 +13,7 @@ import 'UI/components/progressBar'
 
 
 
-Window {
+ApplicationWindow {
     id:mainWindow
     width: 640
     height: 500
@@ -23,6 +23,11 @@ Window {
     property int pauseButtonSize: 80;
     property int otherButtonSize: 60;
     property int progressBarSize: 250;
+
+    property string buttonColor: "transparent";
+    property string borderColor: "black";
+    property int buttonWidth: 100
+    property int buttonHeight: 40
 
     property string color0: "#00000000";
     property string color1: "#FDED00";
@@ -134,22 +139,74 @@ Window {
                 Layout.alignment: Qt.AlignCenter
 
                 color:color0
-                    // Restart Button
-                    TripleButton{
-                        id:tripleButton
+                // Restart Button
+                Rectangle{
+                    id:tripleButtonContainer
+                    width: buttonWidth * 3
+                    height: buttonHeight
+                    color: "transparent"
 
-                        leftText: "Left";
-                        centerText: "Center";
-                        rightText: "Right";
-                        buttonColor: "transparent";
-                        borderColor: "black";
-                        buttonWidth: 100
-                        buttonHeight: 40
+                    Rectangle{
+                        id:leftButtonContainer
+                        height: buttonWidth/2
+                        width:buttonWidth
+                        color:buttonColor
 
-                        anchors.left: pauseMainContainer.left
-
+                        anchors.left: tripleButtonContainer.left
+                        LeftButton{
+                            id:leftButton
+                            buttonHeight: 40
+                            buttonWidth: 100
+                            displayedText: qsTr("left")
+                            buttonColor: buttonColor
+                            borderColor: borderColor
+                        }
                     }
 
+
+                    Rectangle{
+                        id:centerButtonContainer
+                        height: buttonWidth/2
+                        width:buttonWidth
+
+                        anchors.right: rightButtonContainer.left
+                        anchors.left: leftButtonContainer.right
+
+
+                        color:buttonColor
+                        SquareButton{
+                            id:centerButton
+                            buttonHeight: 40
+                            buttonWidth: 100
+                            displayedText:qsTr("pause");
+                            buttonColor:buttonColor
+                            borderColor: borderColor
+
+                            onPressed: bridge.clock_coundown()
+                        }
+                    }
+
+                    Rectangle{
+                        id:rightButtonContainer
+                        height: buttonWidth/2
+                        width:buttonWidth
+                        color:buttonColor
+                        //            anchors.left: centerButtonContainer.right
+                        anchors.right: tripleButtonContainer.right
+
+                        RoundButton{
+                            id:rightButton
+                            buttonHeight: 40
+                            buttonWidth: 100
+                            displayedText:qsTr("Right");
+                            buttonColor: buttonColor
+                            borderColor: borderColor
+
+
+
+                        }
+                    }
+                }
             }
 
             Rectangle{
@@ -163,7 +220,7 @@ Window {
 
                 // Time button Layout
                 RowLayout{
-                    // Add 5 minutes
+                    // Add 10 minutes
                     Rectangle{
                         id:fiveMinContainer
                         height: 40
@@ -172,7 +229,7 @@ Window {
 
                         LeftButton{
                             id:fiveMinuteButton
-                            displayedText:"+ 5";
+                            displayedText:"+10";
                             buttonColor:color0
                             borderColor: "black"
 
@@ -180,9 +237,11 @@ Window {
                             anchors.bottom: fiveMinContainer.bottom
                             anchors.left: fiveMinContainer.left
                             anchors.right: fiveMinContainer.right
+                            onPressed: bridge.add_time(10)
+
                         }
                     }
-                    // Add 10 minutes
+                    // Add 15 minutes
                     Rectangle{
                         id:tenMinContainer
                         height: 40
@@ -191,7 +250,7 @@ Window {
 
                         RoundButton{
                             id:tenMinuteButton
-                            displayedText: "+10"
+                            displayedText: "+15"
                             buttonColor:color0
                             borderColor: "black"
 
@@ -199,7 +258,7 @@ Window {
                             anchors.bottom: tenMinContainer.bottom
                             anchors.left: tenMinContainer.left
                             anchors.right: tenMinContainer.right
-
+                            onPressed: bridge.add_time(15)
 
                         }
                     }

@@ -26,10 +26,13 @@ class Pomodoro():
         """
         self.minutes = time
 
-    def countdown(self):
+    def countdown(self, run):
         """ Decreases the number of seconds by 1.
         """
-        self.seconds  = self.seconds -1
+        while run:
+            self.seconds  = self.seconds -1
+            print(self.seconds)
+
 
     def add_10_minutes(self):
         """ Increases number of minutes by 10
@@ -46,6 +49,7 @@ class Pomodoro():
         """
         self.minutes += 20
 
+
 @QmlElement
 class Bridge(QObject):
     """ Bridge class is used to connect the python logic to the
@@ -54,30 +58,34 @@ class Bridge(QObject):
     def __init__(self):
         QObject.__init__(self)
         self.timer = Pomodoro()
+        self.running = False
 
     def set_starting_time(self, time):
         """ Sets the starting time of the countdown clock.
         """
         self.timer.set_starting_time(time)
 
-
+    @Slot(int, result=int)
     def add_time(self, time):
         """ Based on the value provided by the "time" variable
         a diiferent case will be executed adding the specified time to the
         countdown timer.
         """
+        print(time)
         match time:
             case 10:
                 self.timer.add_10_minutes()
+                print(self.timer.minutes)
             case 15:
                 self.timer.add_15_minutes()
-            case 20:
-                self.timer.add_20_minutes()
+                print(self.timer.minutes)
+
 
     def clock_coundown(self):
         """ Subtract 1 second from the current time of in the Pomodoro class.
         """
-        self.timer.countdown()
+        self.running = not self.running
+        self.timer.countdown(self.running)
 
 
 

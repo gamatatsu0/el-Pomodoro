@@ -21,6 +21,19 @@
                         "name": "QML.Element",
                         "value": "auto"
                     }
+                ],
+                "slots": [
+                    {
+                        "access": "public",
+                        "name": "add_time",
+                        "arguments": [
+                            {
+                                "name": "a1",
+                                "type": "int"
+                            }
+                        ],
+                        "returnType": "int"
+                    }
                 ]
             }
         ],

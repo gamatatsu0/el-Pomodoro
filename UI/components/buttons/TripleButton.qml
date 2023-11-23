@@ -13,7 +13,6 @@ Item {
     property int buttonWidth: 100
     property int buttonHeight: 40
 
-
     Rectangle{
         id:tripleButtonContainer
         width: buttonWidth * 3
@@ -36,10 +35,9 @@ Item {
                 displayedText: qsTr(leftText)
                 buttonColor: buttonColor
                 borderColor: borderColor
-
-
             }
         }
+
         Rectangle{
             id:centerButtonContainer
             height: buttonWidth/2
@@ -48,16 +46,17 @@ Item {
             anchors.right: rightButtonContainer.left
             anchors.left: leftButtonContainer.right
 
+
             color:buttonColor
             SquareButton{
                 id:centerButton
                 buttonHeight: 40
                 buttonWidth: 100
-                displayedText:"+ 5";
+                displayedText:centerText;
                 buttonColor:buttonColor
                 borderColor: borderColor
 
-
+                onPressed: bridge.clock_coundown()
             }
         }
         Rectangle{
@@ -72,7 +71,7 @@ Item {
                 id:rightButton
                 buttonHeight: 40
                 buttonWidth: 100
-                displayedText:"+ 5";
+                displayedText:rightText;
                 buttonColor: buttonColor
                 borderColor: borderColor
 
