@@ -36,7 +36,7 @@ ApplicationWindow {
     property string color4: "#3D257B";
     property string color5: "#FF8400";
 
-
+    property bool menuVisible: true
 
     property string title_x_sm: "./UI/src/assets/images/small.png";
 
@@ -47,10 +47,7 @@ ApplicationWindow {
     }
 
     Rectangle{
-        height: mainWindow.height
-        width: mainWindow.width
-        color: color1
-
+        height: mainWindow.height; width: mainWindow.width; color: color1
         anchors.left: mainWindow.left
         anchors.right: mainWindow.right
 
@@ -63,34 +60,31 @@ ApplicationWindow {
             Rectangle{
                 id:titleContainer
 
+                width: mainWindow.width; height: 50; color:color0;
                 anchors.bottomMargin: 50
                 Layout.alignment: Qt.AlignCenter
-                color:color0;
-                width:  mainWindow.width
-                height: 50
 
                 // Program Title
                 Rectangle{
                     id:titleImageContainer
 
-                    height: parent.height
-                    width: parent.width/2
+                    height: parent.height; width: parent.width/2; color:color0
                     anchors.topMargin: 10
                     anchors.horizontalCenter:parent.horizontalCenter
-                    color:color0
+
 
                     Image {
                         id: titleImage
 
-                        width: parent.width
-                        height: parent.height
+                        width: parent.width; height: parent.height
                         source: title_x_sm;
                     }
                     Shape {
                         id:lineShape
-                        width: mainWindow.width
-                        height: mainWindow.width / (4 * 1.618)
+
+                        width: mainWindow.width; height: mainWindow.width / (4 * 1.618)
                         anchors.centerIn: parent
+
                         ShapePath {
                             strokeColor:"black"
                             fillColor: color0
@@ -133,20 +127,17 @@ ApplicationWindow {
             Rectangle{
                 id:topBodyContainer
 
-                width:mainWindow.width
-                height:mainWindow.height/1.9
+                width:mainWindow.width; height:mainWindow.height/1.9; color:color0
                 Layout.alignment: Qt.AlignCenter
-                color:color0
 
                 // Menu
                 Rectangle{
                     id:menuScreen
 
-                    height: menuScreen.width * 1.618
-                    width: mainWindow.width/4
+                    height: menuScreen.width * 1.618; width: mainWindow.width/4; color: "red"
                     anchors.top: titleContainer.bottom
                     anchors.right: mainWindow.right
-                    color: "red"
+                    visible: menuVisible.valueOf(true)? true : false
 
                     ColumnLayout{
                         RightButtonV2{
@@ -172,8 +163,7 @@ ApplicationWindow {
                         Rectangle{
                             id:darkModeSwitchContainer
 
-                            height:darkModeSwitch.height
-                            width: darkModeSwitchContainer * 1.618
+                            height:darkModeSwitch.height; width: darkModeSwitchContainer * 1.618
                             Switch{
                                 id:darkModeSwitch
 
@@ -187,11 +177,9 @@ ApplicationWindow {
                 Rectangle{
                     id:timerContainer
 
+                    width:progressBarSize; height:progressBarSize; color:color0
                     anchors.topMargin: 10
                     anchors.horizontalCenter: topBodyContainer.horizontalCenter
-                    width:progressBarSize
-                    height:progressBarSize
-                    color:color0
 
                     // Timer
                     RoundProgressBar{
@@ -202,8 +190,9 @@ ApplicationWindow {
                         secondsValue: 50
                         maxSecondsValue: 60
                         bgStrokeColor:color3;
-                        color1: color2
-                        color2: color5
+                        color1: color2; color2: color5
+
+                        visible: menuVisible.valueOf(true)? false:true
                     }
                 }
             }
@@ -215,25 +204,20 @@ ApplicationWindow {
             Rectangle{
                 id:pauseMainContainer
 
-                width: 100 *3
-                height: 40;
+                width: 100 *3; height: 40; color:color0;
                 Layout.alignment: Qt.AlignCenter
-                color:color0
+
 
                 // Restart Button
                 Rectangle{
                     id:tripleButtonContainer
 
-                    width: buttonWidth * 3
-                    height: buttonHeight
-                    color: "transparent"
+                    width: buttonWidth * 3; height: buttonHeight; color: "transparent"
 
                     Rectangle{
                         id:leftButtonContainer
 
-                        height: buttonWidth/2
-                        width:buttonWidth
-                        color:buttonColor
+                        height: buttonWidth/2; width:buttonWidth; color:buttonColor
                         anchors.left: tripleButtonContainer.left
 
                         LeftButton{
@@ -252,11 +236,10 @@ ApplicationWindow {
                     Rectangle{
                         id:centerButtonContainer
 
-                        height: buttonWidth/2
-                        width:buttonWidth
+                        height: buttonWidth/2; width:buttonWidth; color:buttonColor
                         anchors.right: rightButtonContainer.left
                         anchors.left: leftButtonContainer.right
-                        color:buttonColor
+
 
                         SquareButton{
                             id:centerButton
@@ -273,9 +256,7 @@ ApplicationWindow {
                     Rectangle{
                         id:rightButtonContainer
 
-                        height: buttonWidth/2
-                        width:buttonWidth
-                        color:buttonColor
+                        height: buttonWidth/2; width:buttonWidth; color:buttonColor
                         anchors.right: tripleButtonContainer.right
 
                         RoundButton{
@@ -285,6 +266,8 @@ ApplicationWindow {
                             displayedText:qsTr("Menu");
                             buttonColor: buttonColor
                             borderColor: borderColor
+                            onPressed: menuVisible = !menuVisible
+
                         }
                     }
                 }
@@ -294,10 +277,9 @@ ApplicationWindow {
             Rectangle{
                 id:buttonContainer
 
-                width: fiveMinContainer.width * 2;
-                height: fiveMinContainer.height;
+                width: fiveMinContainer.width * 2; height: fiveMinContainer.height; color: color0
                 Layout.alignment: Qt.AlignCenter;
-                color: color0
+
 
                 // Time button Layout
                 RowLayout{
@@ -305,9 +287,7 @@ ApplicationWindow {
                     Rectangle{
                         id:fiveMinContainer
 
-                        height: 40
-                        width:timeButtonSize
-                        color:color0
+                        height: 40; width:timeButtonSize; color:color0
 
                         LeftButton{
                             id:fiveMinuteButton
@@ -326,9 +306,7 @@ ApplicationWindow {
                     Rectangle{
                         id:tenMinContainer
 
-                        height: 40
-                        width:timeButtonSize
-                        color:color0
+                        height: 40; width:timeButtonSize; color:color0
 
                         RoundButton{
                             id:tenMinuteButton
