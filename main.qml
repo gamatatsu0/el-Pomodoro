@@ -60,35 +60,37 @@ ApplicationWindow {
             anchors.right: mainWindow.right
             color: "red"
             
-        ColumnLayout{
-            RightButtonV2{
-                displayedText: "20 Minutes"
-            }
-            RightButtonV2{
-                displayedText: "30 Minutes"
-            }
-            RightButtonV2{
-                displayedText: "1 Hour"
-            }
-            RightButtonV2{
-                displayedText: "1.5 Hours"
-            }
+            ColumnLayout{
+                RightButtonV2{
+                    displayedText: "20 Minutes"
+                    onPressed: bridge.set_timer_quickstart(20)
+                }
+                RightButtonV2{
+                    displayedText: "30 Minutes"
+                    onPressed: bridge.set_timer_quickstart(30)
 
-            // Switch for dark mode
+                }
+                RightButtonV2{
+                    displayedText: "1 Hour"
+                    onPressed: bridge.set_timer_quickstart(60)
+                }
+                RightButtonV2{
+                    displayedText: "1.5 Hours"
+                    onPressed: bridge.set_timer_quickstart(90)
+                }
 
-            Rectangle{
-                id:darkModeSwitchContainer
-                height:darkModeSwitch.height
-                width: darkModeSwitchContainer * 1.618
-            Switch{
-                id:darkModeSwitch
-                text:qsTr("Dark Mode")
+                // Switch for dark mode
+
+                Rectangle{
+                    id:darkModeSwitchContainer
+                    height:darkModeSwitch.height
+                    width: darkModeSwitchContainer * 1.618
+                    Switch{
+                        id:darkModeSwitch
+                        text:qsTr("Dark Mode")
+                    }
+                }
             }
-            }
-
-        }
-
-
         }
 
         ColumnLayout{
@@ -153,6 +155,14 @@ ApplicationWindow {
                 interval: 1000; running:true; repeat:true;
                 onTriggered:roundTimer.timeText = bridge.get_current_time(1)
             }
+            Timer{
+                interval: 1000; running:true; repeat:true;
+                onTriggered:roundTimer.secondsValue = bridge.get_current_time_seconds(1)
+            }
+            Timer{
+                interval: 1000; running:true; repeat:true;
+                onTriggered:roundTimer.maxSecondsValue = bridge.get_last_starting_time(1)
+            }
             // Top Body container
             Rectangle{
                 id:topBodyContainer
@@ -176,6 +186,8 @@ ApplicationWindow {
                         id:roundTimer
                         size:250;
                         timeText: qsTr("15:30")
+                        secondsValue: 50
+                        maxSecondsValue: 60
                         bgStrokeColor:color3;
                         color1: color2
                         color2: color5

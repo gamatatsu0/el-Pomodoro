@@ -19,7 +19,7 @@ class Pomodoro():
     """ This class is the logic of the pomodoro timer.
     """
     def __init__(self):
-        self.minutes = 20
+        self.minutes = 1
         self.seconds = self.minutes * 60
 
 
@@ -73,6 +73,7 @@ class Bridge(QObject):
 
     def set_starting_time(self, timer):
         """ Sets the starting time of the countdown clock.
+            The 'timer' parameter is to receive the time being set in minutes.
         """
         self.timer.set_starting_time(timer)
 
@@ -89,11 +90,32 @@ class Bridge(QObject):
         return string_time
 
     @Slot(int, result=int)
+    def get_current_time_seconds(self, seconds):
+        """ Returns time left in seconds
+        * "seconds" parameter being passed is just present to prevent an error.
+        """
+        seconds = self.timer.get_current_time_seconds()
+        return seconds
+
+
+    @Slot(int, result=int)
+    def get_last_starting_time(self, seconds):
+        """ Returns time left in seconds
+        * "seconds" parameter being passed is just present to prevent an error.
+        """
+
+        if self.lastStartingTime:
+            return self.lastStartingTime[0] * 60
+
+        return 0
+
+    @Slot(int, result=int)
     def add_time(self, timer):
         """ Based on the value provided by the "time" variable
         a diiferent case will be executed adding the specified time to the
         countdown timer.
         """
+
         print(timer)
         match timer:
             case 10:
@@ -109,6 +131,7 @@ class Bridge(QObject):
         """
         print("count: "+str(count))
         self.timer.countdown(self.running)
+        self.check_if_done()
 
 
     @Slot(bool, result=bool)
@@ -135,17 +158,37 @@ class Bridge(QObject):
 
         if minutes < 1 and seconds < 1:
             self.running = False
-            self.re_start(1)
+            self.re_start(1) # Passing '1' because parameter is expected but doesnt do anything
 
     @Slot(int, result=bool)
-    def re_start(self,restart):
+    def re_start(self, restart):
         """ Re-set the timer to the last known starting time.
+            The last known starting time is held in an array of length 1.
+            * 'restart' parameter is only present to prevent an error.
         """
-        print("re-start pressed")
+
+        if self.get_last_starting_time(1) < 60:
+            print("less than 60")
+            pass
+        else:
+            print("re-start pressed")
+            self.running = False
+            print(self.lastStartingTime[0])
+            self.set_starting_time(self.lastStartingTime[0])
+            print(self.timer.get_current_time_seconds())
+
+    @Slot(int, result=str)
+    def set_timer_quickstart(self, minutes):
+        """ Set the timer to 'minutes var' minutes.
+            * The 'minutes' parameter passed sets holds the desired time.
+                for the quickstart timer.
+                quickstart timer just refers to the buttons with predefined times for
+                the user.
+            * First the stimer stops and after that the time is changed.
+
+        """
         self.running = False
-        print(self.lastStartingTime[0])
-        self.set_starting_time(self.lastStartingTime[0])
-        print(self.timer.get_current_time_seconds())
+        self.timer.set_starting_time(minutes)
 
 
 

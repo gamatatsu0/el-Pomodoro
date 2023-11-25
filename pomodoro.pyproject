@@ -6,6 +6,7 @@
         "UI/components/buttons/RoundButton.qml",
         "UI/components/buttons/SquareButton.qml",
         "UI/components/buttons/TripleButton.qml",
-        "UI/components/buttons/RightButtonV2.qml"
+        "UI/components/buttons/RightButtonV2.qml",
+        "UI/components/progressBar/RoundProgressBar.qml"
     ]
 }

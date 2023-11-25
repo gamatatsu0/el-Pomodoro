@@ -36,6 +36,28 @@
                     },
                     {
                         "access": "public",
+                        "name": "get_current_time_seconds",
+                        "arguments": [
+                            {
+                                "name": "a1",
+                                "type": "int"
+                            }
+                        ],
+                        "returnType": "int"
+                    },
+                    {
+                        "access": "public",
+                        "name": "get_last_starting_time",
+                        "arguments": [
+                            {
+                                "name": "a1",
+                                "type": "int"
+                            }
+                        ],
+                        "returnType": "int"
+                    },
+                    {
+                        "access": "public",
                         "name": "add_time",
                         "arguments": [
                             {
@@ -77,6 +99,17 @@
                             }
                         ],
                         "returnType": "bool"
+                    },
+                    {
+                        "access": "public",
+                        "name": "set_timer_quickstart",
+                        "arguments": [
+                            {
+                                "name": "a1",
+                                "type": "int"
+                            }
+                        ],
+                        "returnType": "QString"
                     }
                 ]
             }

@@ -18,8 +18,9 @@ Item {
 //   General Gauge Properties
     property int size: 100;
     property bool roundCap: true
-    property int startAngle: -210
-    property string rpmValue: "5" // Value for the number in the center
+    property int startAngle: 90
+    property int secondsValue: 5 // Value for the number in the center
+    property int maxSecondsValue: 60
     property int samples: 12
 
 
@@ -29,12 +30,12 @@ Item {
     property int strokeBgWidth: 8;
 
 //    Progress Circle
-    property color progressColor: (progress.rpmValue < 6000)? "blue" : "red"
+    property color progressColor: (progress.secondsValue  < 30)?  "red" : "Blue"
     property color lessColor: "blue"
     property color color1: "blue"
     property color color2: "red"
 
-    property int progressWidth: 40
+    property int progressWidth: 8
 
 //    Text Properties
     property string timeText: "%"
@@ -87,7 +88,7 @@ Item {
                 centerX: progress.width / 2
                 centerY: progress.height / 2
                 startAngle: progress.startAngle
-                sweepAngle: (240 / progress.maxRPMValue * progress.rpmValue)
+                sweepAngle: (360 / progress.maxSecondsValue * progress.secondsValue)
 
             }
 

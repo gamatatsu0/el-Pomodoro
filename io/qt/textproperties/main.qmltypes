@@ -19,6 +19,16 @@ Module {
             Parameter { name: "a1"; type: "int" }
         }
         Method {
+            name: "get_current_time_seconds"
+            type: "int"
+            Parameter { name: "a1"; type: "int" }
+        }
+        Method {
+            name: "get_last_starting_time"
+            type: "int"
+            Parameter { name: "a1"; type: "int" }
+        }
+        Method {
             name: "add_time"
             type: "int"
             Parameter { name: "a1"; type: "int" }
@@ -36,6 +46,11 @@ Module {
         Method {
             name: "re_start"
             type: "bool"
+            Parameter { name: "a1"; type: "int" }
+        }
+        Method {
+            name: "set_timer_quickstart"
+            type: "QString"
             Parameter { name: "a1"; type: "int" }
         }
     }
