@@ -15,8 +15,8 @@ import 'UI/components/progressBar'
 
 ApplicationWindow {
     id:mainWindow
-    width: 640
-    height: 500
+    width: 400
+    height: mainWindow.width * 1.618
     visible: true
 
     property int timeButtonSize: 100;
@@ -36,6 +36,8 @@ ApplicationWindow {
     property string color4: "#3D257B";
     property string color5: "#FF8400";
 
+
+
     property string title_x_sm: "./UI/src/assets/images/small.png";
 
 
@@ -52,63 +54,25 @@ ApplicationWindow {
         anchors.left: mainWindow.left
         anchors.right: mainWindow.right
 
-        // Menu
-        Rectangle{
-            id:menuScreen
-            height: menuScreen.width * 1.618
-            width: mainWindow.width/4
-            anchors.right: mainWindow.right
-            color: "red"
-            
-            ColumnLayout{
-                RightButtonV2{
-                    displayedText: "20 Minutes"
-                    onPressed: bridge.set_timer_quickstart(20)
-                }
-                RightButtonV2{
-                    displayedText: "30 Minutes"
-                    onPressed: bridge.set_timer_quickstart(30)
-
-                }
-                RightButtonV2{
-                    displayedText: "1 Hour"
-                    onPressed: bridge.set_timer_quickstart(60)
-                }
-                RightButtonV2{
-                    displayedText: "1.5 Hours"
-                    onPressed: bridge.set_timer_quickstart(90)
-                }
-
-                // Switch for dark mode
-
-                Rectangle{
-                    id:darkModeSwitchContainer
-                    height:darkModeSwitch.height
-                    width: darkModeSwitchContainer * 1.618
-                    Switch{
-                        id:darkModeSwitch
-                        text:qsTr("Dark Mode")
-                    }
-                }
-            }
-        }
-
         ColumnLayout{
             id:mainLayout
+
             spacing:20
 
             // Title container
             Rectangle{
                 id:titleContainer
+
                 anchors.bottomMargin: 50
                 Layout.alignment: Qt.AlignCenter
                 color:color0;
-
-                width:  640
+                width:  mainWindow.width
                 height: 50
+
                 // Program Title
                 Rectangle{
                     id:titleImageContainer
+
                     height: parent.height
                     width: parent.width/2
                     anchors.topMargin: 10
@@ -117,37 +81,38 @@ ApplicationWindow {
 
                     Image {
                         id: titleImage
+
                         width: parent.width
                         height: parent.height
                         source: title_x_sm;
                     }
                     Shape {
-                        width: 640
-                        height: 60
+                        id:lineShape
+                        width: mainWindow.width
+                        height: mainWindow.width / (4 * 1.618)
                         anchors.centerIn: parent
                         ShapePath {
                             strokeColor:"black"
                             fillColor: color0
-                            startX: 0; startY: 15
-                            PathLine { x: 70; y: 15 }
-                            PathLine { x: 100; y: 0 }
+                            startX: 0; startY: (lineShape.height*.3)
+                            PathLine { x: (lineShape.width*.109); y: (lineShape.height*.3) }
+                            PathLine { x: (lineShape.width*.156); y: 0 }
 
-                            PathLine { x: 500; y: 0 }
+                            PathLine { x: (lineShape.width*.781); y: 0 }
 
-                            PathLine { x: 530; y: 20 }
-                            PathLine { x: 640; y: 20 }
-                            PathLine { x: 640; y: 60 }
+                            PathLine { x: (lineShape.width*.828); y:  (lineShape.height*.3)}
+                            PathLine { x: (lineShape.width); y: (lineShape.height*.3) }
+                            PathLine { x: (lineShape.width); y: (lineShape.height) }
 
-                            PathLine { x: 140; y: 60 }
+                            PathLine { x: (lineShape.width*.219); y:(lineShape.height) }
 
-                            PathLine { x: 120; y: 40 }
-                            PathLine { x: 0; y:40  }
+                            PathLine { x: (lineShape.width*.188); y: (lineShape.height*.8) }
+                            PathLine { x: 0; y:(lineShape.height*.8)  }
                             PathLine { x: 0; y:0  }
 
                         }
                     }
                 }
-
             }
 
 
@@ -163,20 +128,67 @@ ApplicationWindow {
                 interval: 1000; running:true; repeat:true;
                 onTriggered:roundTimer.maxSecondsValue = bridge.get_last_starting_time(1)
             }
+
             // Top Body container
             Rectangle{
                 id:topBodyContainer
-                width:progressBarSize
-                height:progressBarSize
+
+                width:mainWindow.width
+                height:mainWindow.height/1.9
                 Layout.alignment: Qt.AlignCenter
                 color:color0
+
+                // Menu
+                Rectangle{
+                    id:menuScreen
+
+                    height: menuScreen.width * 1.618
+                    width: mainWindow.width/4
+                    anchors.top: titleContainer.bottom
+                    anchors.right: mainWindow.right
+                    color: "red"
+
+                    ColumnLayout{
+                        RightButtonV2{
+                            displayedText: "20 Minutes"
+                            onPressed: bridge.set_timer_quickstart(20)
+                        }
+                        RightButtonV2{
+                            displayedText: "30 Minutes"
+                            onPressed: bridge.set_timer_quickstart(30)
+
+                        }
+                        RightButtonV2{
+                            displayedText: "1 Hour"
+                            onPressed: bridge.set_timer_quickstart(60)
+                        }
+                        RightButtonV2{
+                            displayedText: "1.5 Hours"
+                            onPressed: bridge.set_timer_quickstart(90)
+                        }
+
+                        // Switch for dark mode
+
+                        Rectangle{
+                            id:darkModeSwitchContainer
+
+                            height:darkModeSwitch.height
+                            width: darkModeSwitchContainer * 1.618
+                            Switch{
+                                id:darkModeSwitch
+
+                                text:qsTr("Dark Mode")
+                            }
+                        }
+                    }
+                }
 
                 // Timer container
                 Rectangle{
                     id:timerContainer
+
                     anchors.topMargin: 10
-                    anchors.right: topBodyContainer.right
-                    anchors.left: topBodyContainer.left
+                    anchors.horizontalCenter: topBodyContainer.horizontalCenter
                     width:progressBarSize
                     height:progressBarSize
                     color:color0
@@ -184,6 +196,7 @@ ApplicationWindow {
                     // Timer
                     RoundProgressBar{
                         id:roundTimer
+
                         size:250;
                         timeText: qsTr("15:30")
                         secondsValue: 50
@@ -205,30 +218,32 @@ ApplicationWindow {
                 width: 100 *3
                 height: 40;
                 Layout.alignment: Qt.AlignCenter
-
                 color:color0
+
                 // Restart Button
                 Rectangle{
                     id:tripleButtonContainer
+
                     width: buttonWidth * 3
                     height: buttonHeight
                     color: "transparent"
 
                     Rectangle{
                         id:leftButtonContainer
+
                         height: buttonWidth/2
                         width:buttonWidth
                         color:buttonColor
-
                         anchors.left: tripleButtonContainer.left
+
                         LeftButton{
                             id:leftButton
+
                             buttonHeight: 40
                             buttonWidth: 100
                             displayedText: qsTr("Re-Start")
                             buttonColor: buttonColor
                             borderColor: borderColor
-
                             onPressed: bridge.re_start(1)
                         }
                     }
@@ -236,32 +251,31 @@ ApplicationWindow {
 
                     Rectangle{
                         id:centerButtonContainer
+
                         height: buttonWidth/2
                         width:buttonWidth
-
                         anchors.right: rightButtonContainer.left
                         anchors.left: leftButtonContainer.right
-
-
                         color:buttonColor
+
                         SquareButton{
                             id:centerButton
+
                             buttonHeight: 40
                             buttonWidth: 100
                             displayedText:qsTr("Pause");
                             buttonColor:buttonColor
                             borderColor: borderColor
-
                             onPressed: bridge.pause_or_start(true)
                         }
                     }
 
                     Rectangle{
                         id:rightButtonContainer
+
                         height: buttonWidth/2
                         width:buttonWidth
                         color:buttonColor
-                        //            anchors.left: centerButtonContainer.right
                         anchors.right: tripleButtonContainer.right
 
                         RoundButton{
@@ -271,9 +285,6 @@ ApplicationWindow {
                             displayedText:qsTr("Menu");
                             buttonColor: buttonColor
                             borderColor: borderColor
-
-
-
                         }
                     }
                 }
@@ -285,7 +296,6 @@ ApplicationWindow {
 
                 width: fiveMinContainer.width * 2;
                 height: fiveMinContainer.height;
-
                 Layout.alignment: Qt.AlignCenter;
                 color: color0
 
@@ -294,37 +304,38 @@ ApplicationWindow {
                     // Add 10 minutes
                     Rectangle{
                         id:fiveMinContainer
+
                         height: 40
                         width:timeButtonSize
                         color:color0
 
                         LeftButton{
                             id:fiveMinuteButton
+
                             displayedText:"+10";
                             buttonColor:color0
                             borderColor: "black"
-
                             anchors.top: fiveMinContainer.top
                             anchors.bottom: fiveMinContainer.bottom
                             anchors.left: fiveMinContainer.left
                             anchors.right: fiveMinContainer.right
                             onPressed: bridge.add_time(10)
-
                         }
                     }
                     // Add 15 minutes
                     Rectangle{
                         id:tenMinContainer
+
                         height: 40
                         width:timeButtonSize
                         color:color0
 
                         RoundButton{
                             id:tenMinuteButton
+
                             displayedText: "+15"
                             buttonColor:color0
                             borderColor: "black"
-
                             anchors.top: tenMinContainer.top
                             anchors.bottom: tenMinContainer.bottom
                             anchors.left: tenMinContainer.left
