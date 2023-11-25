@@ -51,18 +51,40 @@ ApplicationWindow {
 
         anchors.left: mainWindow.left
         anchors.right: mainWindow.right
+
+        // Menu
         Rectangle{
             id:menuScreen
-            height:mainWindow.height
-            width: mainWindow.width/2
+            height: menuScreen.width * 1.618
+            width: mainWindow.width/4
             anchors.right: mainWindow.right
             color: "red"
             
         ColumnLayout{
-            RightButtonV2{}
-            RightButtonV2{}
-            RightButtonV2{}
-            RightButtonV2{}
+            RightButtonV2{
+                displayedText: "20 Minutes"
+            }
+            RightButtonV2{
+                displayedText: "30 Minutes"
+            }
+            RightButtonV2{
+                displayedText: "1 Hour"
+            }
+            RightButtonV2{
+                displayedText: "1.5 Hours"
+            }
+
+            // Switch for dark mode
+
+            Rectangle{
+                id:darkModeSwitchContainer
+                height:darkModeSwitch.height
+                width: darkModeSwitchContainer * 1.618
+            Switch{
+                id:darkModeSwitch
+                text:qsTr("Dark Mode")
+            }
+            }
 
         }
 

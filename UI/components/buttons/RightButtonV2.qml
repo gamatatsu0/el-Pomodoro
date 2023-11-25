@@ -40,7 +40,7 @@ Button{
                 fillColor: buttonColor
                 startX: 0; startY: 0
                 PathLine { x: buttonWidth; y: 0 }
-                PathLine { x: buttonWidth; y: (buttonHeight * .8) }
+                PathLine { x: buttonWidth; y: (buttonHeight * .7) }
 
                 PathLine { x: (buttonWidth * .85); y: (buttonHeight) }
 
