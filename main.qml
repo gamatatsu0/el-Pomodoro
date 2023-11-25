@@ -51,6 +51,24 @@ ApplicationWindow {
 
         anchors.left: mainWindow.left
         anchors.right: mainWindow.right
+        Rectangle{
+            id:menuScreen
+            height:mainWindow.height
+            width: mainWindow.width/2
+            anchors.right: mainWindow.right
+            color: "red"
+            
+        ColumnLayout{
+            RightButtonV2{}
+            RightButtonV2{}
+            RightButtonV2{}
+            RightButtonV2{}
+
+        }
+
+
+        }
+
         ColumnLayout{
             id:mainLayout
             spacing:20
@@ -86,8 +104,14 @@ ApplicationWindow {
                         ShapePath {
                             strokeColor:"black"
                             fillColor: color0
-                            startX: 0; startY: 0
-                            PathLine { x: 640; y: 0 }
+                            startX: 0; startY: 15
+                            PathLine { x: 70; y: 15 }
+                            PathLine { x: 100; y: 0 }
+
+                            PathLine { x: 500; y: 0 }
+
+                            PathLine { x: 530; y: 20 }
+                            PathLine { x: 640; y: 20 }
                             PathLine { x: 640; y: 60 }
 
                             PathLine { x: 140; y: 60 }
@@ -101,6 +125,8 @@ ApplicationWindow {
                 }
 
             }
+
+
             Timer{
                 interval: 1000; running:true; repeat:true;
                 onTriggered:roundTimer.timeText = bridge.get_current_time(1)
@@ -134,6 +160,7 @@ ApplicationWindow {
                     }
                 }
             }
+
             Timer{
                 interval: 1000; running:true; repeat:true;
                 onTriggered: bridge.clock_coundown(true)
@@ -164,9 +191,11 @@ ApplicationWindow {
                             id:leftButton
                             buttonHeight: 40
                             buttonWidth: 100
-                            displayedText: qsTr("left")
+                            displayedText: qsTr("Re-Start")
                             buttonColor: buttonColor
                             borderColor: borderColor
+
+                            onPressed: bridge.re_start(1)
                         }
                     }
 
@@ -185,7 +214,7 @@ ApplicationWindow {
                             id:centerButton
                             buttonHeight: 40
                             buttonWidth: 100
-                            displayedText:qsTr("pause");
+                            displayedText:qsTr("Pause");
                             buttonColor:buttonColor
                             borderColor: borderColor
 
@@ -205,7 +234,7 @@ ApplicationWindow {
                             id:rightButton
                             buttonHeight: 40
                             buttonWidth: 100
-                            displayedText:qsTr("Right");
+                            displayedText:qsTr("Menu");
                             buttonColor: buttonColor
                             borderColor: borderColor
 
@@ -215,6 +244,7 @@ ApplicationWindow {
                     }
                 }
             }
+
 
             Rectangle{
                 id:buttonContainer
@@ -273,6 +303,8 @@ ApplicationWindow {
                 }
 
             }
+
+
         }
 
     }

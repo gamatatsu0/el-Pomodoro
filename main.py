@@ -19,7 +19,7 @@ class Pomodoro():
     """ This class is the logic of the pomodoro timer.
     """
     def __init__(self):
-        self.minutes= 20
+        self.minutes = 20
         self.seconds = self.minutes * 60
 
 
@@ -27,6 +27,7 @@ class Pomodoro():
         """ Sets the starting time of the Pomodoro timer.
         """
         self.minutes = minutes
+        self.seconds = minutes * 60
 
     def get_current_time_seconds(self):
         """ Return the current time left on timer in seconds.
@@ -119,6 +120,7 @@ class Bridge(QObject):
 
         if fresh_start > self.lastStartingTime[0]:
             self.lastStartingTime[0] = fresh_start
+            print(self.lastStartingTime[0])
 
         print(str(count) +": " + str(self.running))
 
@@ -133,13 +135,17 @@ class Bridge(QObject):
 
         if minutes < 1 and seconds < 1:
             self.running = False
-            self.re_start()
+            self.re_start(1)
 
-    def re_start(self):
+    @Slot(int, result=bool)
+    def re_start(self,restart):
         """ Re-set the timer to the last known starting time.
         """
+        print("re-start pressed")
         self.running = False
+        print(self.lastStartingTime[0])
         self.set_starting_time(self.lastStartingTime[0])
+        print(self.timer.get_current_time_seconds())
 
 
 

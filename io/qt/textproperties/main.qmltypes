@@ -14,6 +14,11 @@ Module {
         exports: ["io.qt.textproperties/Bridge 1.0"]
         exportMetaObjectRevisions: [256]
         Method {
+            name: "get_current_time"
+            type: "QString"
+            Parameter { name: "a1"; type: "int" }
+        }
+        Method {
             name: "add_time"
             type: "int"
             Parameter { name: "a1"; type: "int" }
@@ -27,6 +32,11 @@ Module {
             name: "pause_or_start"
             type: "bool"
             Parameter { name: "a1"; type: "bool" }
+        }
+        Method {
+            name: "re_start"
+            type: "bool"
+            Parameter { name: "a1"; type: "int" }
         }
     }
 }

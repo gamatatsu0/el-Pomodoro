@@ -3,9 +3,9 @@
         "main.py",
         "main.qml",
         "UI/components/buttons/LeftButton.qml",
-        "UI/components/buttons/PauseButton.qml",
         "UI/components/buttons/RoundButton.qml",
         "UI/components/buttons/SquareButton.qml",
-        "UI/components/buttons/TripleButton.qml"
+        "UI/components/buttons/TripleButton.qml",
+        "UI/components/buttons/RightButtonV2.qml"
     ]
 }

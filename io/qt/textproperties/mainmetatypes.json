@@ -25,6 +25,17 @@
                 "slots": [
                     {
                         "access": "public",
+                        "name": "get_current_time",
+                        "arguments": [
+                            {
+                                "name": "a1",
+                                "type": "int"
+                            }
+                        ],
+                        "returnType": "QString"
+                    },
+                    {
+                        "access": "public",
                         "name": "add_time",
                         "arguments": [
                             {
@@ -52,6 +63,17 @@
                             {
                                 "name": "a1",
                                 "type": "bool"
+                            }
+                        ],
+                        "returnType": "bool"
+                    },
+                    {
+                        "access": "public",
+                        "name": "re_start",
+                        "arguments": [
+                            {
+                                "name": "a1",
+                                "type": "int"
                             }
                         ],
                         "returnType": "bool"
