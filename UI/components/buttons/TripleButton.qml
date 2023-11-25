@@ -67,6 +67,7 @@ Item {
 //            anchors.left: centerButtonContainer.right
             anchors.right: tripleButtonContainer.right
 
+
             RoundButton{
                 id:rightButton
                 buttonHeight: 40

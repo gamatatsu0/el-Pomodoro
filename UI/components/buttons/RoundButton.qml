@@ -28,9 +28,12 @@ Button{
     }
 
     background:Rectangle{
-        width: 100
-        height: 40
-        color:buttonColor
+        id:rightButtonBackground
+        width: 100; height: 40; color:buttonColor
+        opacity: 1.0;
+
+
+
         Shape {
             width: 100
             height: 40
@@ -48,6 +51,7 @@ Button{
                 PathLine { x: 0; y:0  }
             }
         }
+
     }
 
     Rectangle{
